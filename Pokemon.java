@@ -7,9 +7,10 @@ public class Pokemon {
     String type;
 
     public Pokemon(String str) {
-        if (!str.equalsIgnoreCase("Charmander") ||
-                !str.equalsIgnoreCase("Bulbasaur") ||
-                !str.equalsIgnoreCase("Squirtle")) {
+        if (!str.equalsIgnoreCase("Charmander") &&
+            !str.equalsIgnoreCase("Bulbasaur") &&
+            !str.equalsIgnoreCase("Squirtle") &&
+            !str.equalsIgnoreCase("Snorlax")) {
             System.out.println("Not a valid Pokemon");
             return;
         }
@@ -33,26 +34,28 @@ public class Pokemon {
             this.hp = 20;
             this.type = "normal";
         }
-        
     }
 
     public void attack(Pokemon otherPokemon, String move) {
         int max = 3;
         int min = 1;
         int range = max - min + 1;
-        int rand = (int)(Math.random() * range) + min;
+        int rand = (int) (Math.random() * range) + min;
 
         otherPokemon.hp -= rand;
-        System.out.println(this.name + "used" + move + "against" + otherPokemon.name + 
-                "/n" + otherPokemon.name + "took" + rand + "damage and has" + otherPokemon.hp +
-                "left");
+        System.out.println(this.name + " used " + move + " against " + otherPokemon.name + 
+                "\n" + otherPokemon.name + " took " + rand + " damage and has " + otherPokemon.hp +
+                " left ");
     }
 
     public String pokemonBattle(Pokemon otherPokemon) {
-        Scanner scan = new Scanner(System.in);
+        java.util.Scanner scan = new Scanner(System.in);
         while (this.hp > 0 && otherPokemon.hp > 0) {
+            System.out.println();
+            System.out.println("What move do you want to use?");
             String playerMove = scan.nextLine();
             this.attack(otherPokemon, playerMove);
+            System.out.println();
             otherPokemon.attack(this, "Belly Drum");
         }
         if (this.hp <= 0) {
