@@ -40,7 +40,7 @@ public class Pokemon {
         int max = 3;
         int min = 1;
         int range = max - min + 1;
-        int rand = (Math.random() * range) + min;
+        int rand = (int)(Math.random() * range) + min;
 
         otherPokemon.hp -= rand;
         System.out.println(this.name + "used" + move + "against" + otherPokemon.name + 
