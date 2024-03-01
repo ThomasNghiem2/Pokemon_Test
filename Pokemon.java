@@ -49,7 +49,7 @@ public class Pokemon {
     }
 
     public String pokemonBattle(Pokemon otherPokemon) {
-        java.util.Scanner scan = new Scanner();
+        Scanner scan = new Scanner(System.in);
         while (this.hp > 0 && otherPokemon.hp > 0) {
             String playerMove = scan.nextLine();
             this.attack(otherPokemon, playerMove);
