@@ -37,7 +37,7 @@ class Game {
                 System.out.println("You Tied! Do you want to try again? (type q if you are done, anything else to play again)");
             }
             playAgain = scan.nextLine();
-            goForward = "Change";
+            goForward = "change";
             if(playAgain.equals("q"))
             {
                 System.out.println("Thank you for playing");
