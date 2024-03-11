@@ -7,6 +7,7 @@ class Game {
         String playAgain = "";
         Scanner scan = new Scanner(System.in);
         String namesOfPokemon = "Charmander, Bulbasaur, or Squirtle";
+        String[] pokemonArray = {"Charmander", "Bulbasaur", "Squirtle"};
         Sound mySound = new Sound("pokemonSong.wav");
         mySound.play();
         while (!playAgain.equals("q")){
@@ -17,12 +18,13 @@ class Game {
                 System.out.println("Hi " + playerName + ", what Pokemon do you want to use?" + "\n" +
                 "You can choose " + namesOfPokemon);
                 pokemonName = scan.nextLine();
-                System.out.println("Cool, " + pokemonName + " is a strong one");
-                System.out.println("Your opponent is Thomas and his Snorlax, are you ready? (type c if yes, anything else if no)");
+                System.out.println("Cool, " + pokemonName + " is a strong one. Are you ready? (type c if yes, anything else if no)");
                 goForward = scan.nextLine();
             }
             Pokemon playerPokemon = new Pokemon(pokemonName);
-            Pokemon computerPokemon = new Pokemon("Snorlax");
+            int randPokemon = (int) (Math.random() * 3);
+            Pokemon computerPokemon = new Pokemon(pokemonArray[randPokemon]);
+            System.out.println("Your opponent is Thomas and his " + pokemonArray[randPokemon]);
             String winner = playerPokemon.pokemonBattle(computerPokemon);
             if (winner.equals("player"))
             {
@@ -43,7 +45,6 @@ class Game {
                 System.out.println("Thank you for playing");
                 System.exit(0);
             }
-            scan.close();
     }
 }
 }

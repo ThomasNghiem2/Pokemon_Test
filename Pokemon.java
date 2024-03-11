@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Pokemon {
     String name;
-    int hp;
+    double hp;
     String type;
     MoveSet moveSet;
 
@@ -161,28 +161,28 @@ public class Pokemon {
         if (str.equalsIgnoreCase("Charmander")) {
             this.name = "Charmander";
             this.hp = 10;
-            this.type = "fire";
+            this.type = "Fire";
             moveSet = new MoveSet("charmander");
             System.out.println(charmanderArt);
         }
         if (str.equalsIgnoreCase("Bulbasaur")) {
             this.name = "Bulbasaur";
             this.hp = 10;
-            this.type = "grass";
+            this.type = "Grass";
             moveSet = new MoveSet("bulbasaur");
             System.out.println(bulbasaurArt);
         }
         if (str.equalsIgnoreCase("Squirtle")) {
             this.name = "Squirtle";
             this.hp = 10;
-            this.type = "water";
+            this.type = "Water";
             moveSet = new MoveSet("squirtle");
             System.out.println(squirtleArt);
         }
         if (str.equalsIgnoreCase("Snorlax")) {
             this.name = "Snorlax";
             this.hp = 15;
-            this.type = "normal";
+            this.type = "Normal";
             moveSet = new MoveSet("snorlax");
             System.out.println(snorlaxArt);
         }
@@ -203,7 +203,18 @@ public class Pokemon {
         {
             return;
         }
-        int damage = moveSet.moveList[attackNumber].attack;
+        double damage = moveSet.moveList[attackNumber].attack;
+        double multiplier = checkTyping(moveSet.moveList[attackNumber], otherPokemon);
+        String multiplierText = "";
+        if(multiplier == 1.2)
+        {
+            multiplierText = "It was super effective!";
+        }
+        if(multiplier == 0.8)
+        {
+            multiplierText = "It was not effective.";
+        }
+        damage = Math.round(damage * multiplier);
         otherPokemon.hp -= damage;
         if (this.hp < 0) {
             this.hp = 0;
@@ -211,9 +222,28 @@ public class Pokemon {
         if (otherPokemon.hp < 0) {
             otherPokemon.hp = 0;
         }
-        System.out.println(this.name + " used " + move + " against " + otherPokemon.name + 
-                "\n" + otherPokemon.name + " took " + damage + " damage and has " + otherPokemon.hp +
-                " left ");
+        System.out.println(this.name + " used " + moveSet.moveList[attackNumber].name + " against " + 
+        otherPokemon.name + "\n" + otherPokemon.name + " took " + damage + " damage and has " + 
+        otherPokemon.hp + " hp left. " + multiplierText);
+    }
+
+    public double checkTyping(Move move, Pokemon pokemon)
+    {
+        String[] arrayTypes = {"Fire", "Grass", "Water"};
+        for(int i = 0; i < arrayTypes.length; i++)
+        {
+            if(move.type.equalsIgnoreCase(arrayTypes[i]) && 
+            pokemon.type.equalsIgnoreCase(arrayTypes[(i+1) % 3]))
+            {
+                return 1.2;
+            }
+            if(pokemon.type.equalsIgnoreCase(arrayTypes[i]) && 
+            move.type.equalsIgnoreCase(arrayTypes[(i+1) % 3]))
+            {
+                return 0.8;
+            }
+        }
+        return 1;
     }
 
     public String pokemonBattle(Pokemon otherPokemon) {
@@ -226,9 +256,15 @@ public class Pokemon {
             + this.moveSet.moveList[3]);
             String playerMove = scan.nextLine();
             System.out.println();
+            while (checkMoveValid(playerMove) == false) {
+                System.out.println("Invalid move, try again. Enter valid move \n");
+                playerMove = scan.nextLine();
+                System.out.println();
+            }
             this.attack(otherPokemon, playerMove);
             System.out.println();
-            otherPokemon.attack(this, "Belly Drum");
+            int randAttack = (int) (Math.random() * 4) ;
+            otherPokemon.attack(this, otherPokemon.moveSet.moveList[randAttack].name);
         }
         if (this.hp == 0 && otherPokemon.hp == 0) {
             return "tie";
@@ -239,5 +275,10 @@ public class Pokemon {
         else {
             return "computer";
         }
+    }
+
+    public boolean checkMoveValid(String move) {
+        return move.equalsIgnoreCase(moveSet.moveList[0].name) || move.equalsIgnoreCase(moveSet.moveList[1].name) ||
+            move.equalsIgnoreCase(moveSet.moveList[2].name) || move.equalsIgnoreCase(moveSet.moveList[3].name);
     }
 }
