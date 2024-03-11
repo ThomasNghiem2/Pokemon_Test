@@ -214,8 +214,9 @@ public class Pokemon {
         {
             multiplierText = "It was not effective.";
         }
-        damage = Math.round(damage * multiplier);
+        damage = Math.round(damage * multiplier * 10.0) / 10.0;
         otherPokemon.hp -= damage;
+        otherPokemon.hp = Math.round(otherPokemon.hp * 10.0) / 10.0;
         if (this.hp < 0) {
             this.hp = 0;
         }
