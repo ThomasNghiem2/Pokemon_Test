@@ -160,13 +160,6 @@ public class Pokemon {
                         "            3322255527                                                    3231125544533321         \n" + //
                         "                                                                            13233332337            ";
 
-        if (!str.equalsIgnoreCase("Charmander") &&
-            !str.equalsIgnoreCase("Bulbasaur") &&
-            !str.equalsIgnoreCase("Squirtle") &&
-            !str.equalsIgnoreCase("Snorlax")) {
-            System.out.println("Not a valid Pokemon");
-            return;
-        }
         if (str.equalsIgnoreCase("Charmander")) {
             this.name = "Charmander";
             this.hp = 10;
@@ -226,6 +219,7 @@ public class Pokemon {
         damage = Math.round(damage * multiplier * 10.0) / 10.0;
         otherPokemon.hp -= damage;
         otherPokemon.hp = Math.round(otherPokemon.hp * 10.0) / 10.0;
+        //Doesn't allow negative numbers
         if (this.hp < 0) {
             this.hp = 0;
         }

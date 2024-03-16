@@ -1,7 +1,16 @@
+/* 
+Name: Vinod Vairavaraj and Thomas Nghiem
+Email: vinod.vairavaraj@gmail.com, thomasnghiem2@gmail.com
+Sources used: StackOverflow
+
+This file creates the background music. 
+*/
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
-
+/**
+ * This class creates the background music
+ */
 public class Sound {
     private URL url;
     private Clip clip;

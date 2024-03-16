@@ -7,7 +7,7 @@ This file is for all of the moves in the game.
 */
 import java.lang.Math;
 /**
- * This class creats all of the moves in the game
+ * This class creates all of the moves in the game
  */
 public class Move {
     String name;
