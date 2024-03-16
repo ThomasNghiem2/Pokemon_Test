@@ -1,15 +1,19 @@
-import java.lang.Math;
+/* 
+Name: Vinod Vairavaraj and Thomas Nghiem
+Email: vinod.vairavaraj@gmail.com, thomasnghiem2@gmail.com
+Sources used: StackOverflow, GeeksForGeeks
 
+This file is for all of the moves in the game. 
+*/
+import java.lang.Math;
+/**
+ * This class creats all of the moves in the game
+ */
 public class Move {
     String name;
     String type;
     int attack;
-
-    //int max = 3;
-    //int min = 1;
-    //int range = max - min + 1;
-    //int rand = (int) (Math.random() * range) + min;
-
+    //Creates all of the move objects for the game
     public Move(String str)
     {
         //Charmander moves
@@ -108,7 +112,7 @@ public class Move {
             attack = (int) (Math.random() * range) + 1;
         }
     }
-
+    //Returns name of the Pokemon when printed
     public String toString()
     {
         return name;

@@ -1,7 +1,18 @@
+/* 
+Name: Vinod Vairavaraj and Thomas Nghiem
+Email: vinod.vairavaraj@gmail.com, thomasnghiem2@gmail.com
+Sources used: StackOverflow, GeeksForGeeks
+
+This file creates movesets for all Pokemons. 
+*/
+
+/**
+ * This class creats all of the movesets in the game
+ */
 public class MoveSet 
 {
     Move[] moveList;
-
+    //Creates movesets for all of the Pokemon in the game
     public MoveSet (String str)
     {
         moveList = new Move[4];

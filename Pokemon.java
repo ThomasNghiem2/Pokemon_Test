@@ -1,11 +1,20 @@
-import java.util.Scanner;
+/* 
+Name: Vinod Vairavaraj and Thomas Nghiem
+Email: vinod.vairavaraj@gmail.com, thomasnghiem2@gmail.com
+Sources used: StackOverflow, GeeksForGeeks
 
+This file creates all of the Pokemon in the game. 
+*/
+import java.util.Scanner;
+/**
+ * This class creates all of the Pokemon in the game
+ */
 public class Pokemon {
     String name;
     double hp;
     String type;
     MoveSet moveSet;
-
+    //Creates Pokemon objects
     public Pokemon(String str) {
         String charmanderArt = 
         "              _.--\"\"`-..\r\n" + //
@@ -187,7 +196,7 @@ public class Pokemon {
             System.out.println(snorlaxArt);
         }
     }
-
+    //Pokemon attacks another Pokemon
     public void attack(Pokemon otherPokemon, String move) {
         int invalid = -1;
         int attackNumber = -1;
@@ -227,7 +236,7 @@ public class Pokemon {
         otherPokemon.name + "\n" + otherPokemon.name + " took " + damage + " damage and has " + 
         otherPokemon.hp + " hp left. " + multiplierText);
     }
-
+    //Checks for any type advantages
     public double checkTyping(Move move, Pokemon pokemon)
     {
         String[] arrayTypes = {"Fire", "Grass", "Water"};
@@ -246,7 +255,7 @@ public class Pokemon {
         }
         return 1;
     }
-
+    //Conducts a Pokemon battle
     public String pokemonBattle(Pokemon otherPokemon) {
         java.util.Scanner scan = new Scanner(System.in);
         while (this.hp > 0 && otherPokemon.hp > 0) {
@@ -277,7 +286,7 @@ public class Pokemon {
             return "computer";
         }
     }
-
+    //Checks that all moves are valid
     public boolean checkMoveValid(String move) {
         return move.equalsIgnoreCase(moveSet.moveList[0].name) || move.equalsIgnoreCase(moveSet.moveList[1].name) ||
             move.equalsIgnoreCase(moveSet.moveList[2].name) || move.equalsIgnoreCase(moveSet.moveList[3].name);
