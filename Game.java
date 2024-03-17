@@ -16,7 +16,7 @@ class Game {
     public static void main(String[] args) throws Exception{
         //Variables and Objects 
         String playerName = "";
-        String pokemonName = "";
+        String pokemonName1, pokemonName2, pokemonName3 = "";
         ArrayList<String> pokemonArray = new ArrayList<>() ;
         Scanner scan = new Scanner(System.in);
         Sound mySound = new Sound("pokemonSong.wav");
@@ -38,30 +38,56 @@ class Game {
             {
                 System.out.println("Welcome to Pokemon Battle! What is your name?");
                 playerName = scan.nextLine();
-                System.out.print("\nHi " + playerName + ", what Pokemon do you want to use?" + "\n" +
-                "You can choose");
+                System.out.print("\nHi " + playerName + 
+                    ", what Pokemon do you want to use? (choose 3 Pokemon, press Enter after each one)"
+                     + "\n" + "You can choose");
                 for(int i = 0; i < pokemonArray.size(); i++)
                 {
                     System.out.print(" " + pokemonArray.get(i));
                 }
                 System.out.println();
-                pokemonName = scan.nextLine();
-                //Checks if Pokemon name is valid
-                while (!Pokemon.checkPokeName(pokemonName,pokemonArray))
+                pokemonName1 = scan.nextLine();
+                while (!Pokemon.checkPokeName(pokemonName1,pokemonArray))
                 {
-                    System.out.println("\nInvalid Pokemon, Try again");
-                    pokemonName = scan.nextLine();
+                    System.out.println("\nInvalid Pokemon 1, Try again");
+                    pokemonName1 = scan.nextLine();
                 }
-                pokemonName = pokemonName.substring(0,1).toUpperCase()
-                + pokemonName.substring(1);
-                System.out.println("Cool, " + pokemonName + " is a strong one.");
+                System.out.println("\nPerfect, what's your next Pokemon?");
+                pokemonName2 = scan.nextLine();
+                while (!Pokemon.checkPokeName(pokemonName2,pokemonArray))
+                {
+                    System.out.println("\nInvalid Pokemon 2, Try again");
+                    pokemonName2 = scan.nextLine();
+                }
+                System.out.println("\nPerfect, what's your next Pokemon?");
+                pokemonName3 = scan.nextLine();
+                while (!Pokemon.checkPokeName(pokemonName3,pokemonArray))
+                {
+                    System.out.println("\nInvalid Pokemon 3, Try again");
+                    pokemonName3 = scan.nextLine();
+                }
+                pokemonName1 = pokemonName1.substring(0,1).toUpperCase()
+                + pokemonName1.substring(1);
+                pokemonName2 = pokemonName2.substring(0,1).toUpperCase()
+                + pokemonName2.substring(1);
+                pokemonName3 = pokemonName3.substring(0,1).toUpperCase()
+                + pokemonName3.substring(1);
                 break setup;
             }
-            Pokemon playerPokemon = new Pokemon(pokemonName);
-            int randPokemon = (int) (Math.random() * 3);
-            Pokemon computerPokemon = new Pokemon(pokemonArray.get(randPokemon));
-            System.out.println("Your opponent is Thomas and his " + pokemonArray.get(randPokemon));
-            System.out.println(playerPokemon.pokemonBattle(computerPokemon));
+            Pokemon playerPokemon1 = new Pokemon(pokemonName1);
+            Pokemon playerPokemon2 = new Pokemon(pokemonName2);
+            Pokemon playerPokemon3 = new Pokemon(pokemonName3);
+            Player player = new Player(playerName, playerPokemon1, playerPokemon2, playerPokemon3);
+            System.out.println("Cool, your team of " + player.printTeam() + " is a strong one.");
+            int randPokemon1 = (int) (Math.random() * 3);
+            int randPokemon2 = (int) (Math.random() * 3);
+            int randPokemon3 = (int) (Math.random() * 3);
+            Pokemon computerPokemon1 = new Pokemon(pokemonArray.get(randPokemon1));
+            Pokemon computerPokemon2 = new Pokemon(pokemonArray.get(randPokemon2));
+            Pokemon computerPokemon3 = new Pokemon(pokemonArray.get(randPokemon3));
+            Player cpPlayer = new Player("Thomas", computerPokemon1, computerPokemon2, computerPokemon3);
+            System.out.println("Your opponent is Thomas and his team of " + cpPlayer.printTeam());
+            System.out.println(player.playerBattle(cpPlayer));
             //Play Again
             if(scan.nextLine().equals("q"))
             {

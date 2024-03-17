@@ -9,7 +9,7 @@ public class Player
     {
         team = new Pokemon[3];
         this.name = name;
-        curr = null;
+        curr = one;
         team[0] = one;
         team[1] = two;
         team[2] = three;
@@ -37,7 +37,11 @@ public class Player
         }
     }
 
-    public void attack(Pokemon other) {
-        curr.pokemonBattle(other);
+    public String playerBattle(Player other) {
+        return curr.pokemonBattle(other.curr);
+    }
+
+    public String printTeam() {
+        return team[0].name + ", " + team[1].name + ", and " + team[2].name;
     }
 }
