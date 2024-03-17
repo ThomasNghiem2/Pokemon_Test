@@ -271,15 +271,16 @@ public class Pokemon {
             otherPokemon.attack(this, otherPokemon.moveSet.moveList[randAttack].name);
         }
         if (this.hp == 0 && otherPokemon.hp == 0) {
-            return "tie";
+            return "You Tied! Do you want to try again? (type q if you are done, anything else to play again)";
         }
         else if (otherPokemon.hp == 0) {
-            return "player";
+            return "Congratulations! You won! Do you want to play again? (type q if you are done, anything else to play again)";
         }
         else {
-            return "computer";
+            return "Oh No! You Lost! Do you want to try again? (type q if you are done, anything else to play again)";
         }
     }
+    
     //Checks that all moves are valid
     public boolean checkMoveValid(String move) {
         return move.equalsIgnoreCase(moveSet.moveList[0].name) || move.equalsIgnoreCase(moveSet.moveList[1].name) ||
