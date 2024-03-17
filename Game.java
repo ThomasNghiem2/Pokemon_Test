@@ -38,27 +38,22 @@ class Game {
             {
                 System.out.println("Welcome to Pokemon Battle! What is your name?");
                 playerName = scan.nextLine();
-                System.out.print("Hi " + playerName + ", what Pokemon do you want to use?" + "\n" +
+                System.out.print("\nHi " + playerName + ", what Pokemon do you want to use?" + "\n" +
                 "You can choose");
                 for(int i = 0; i < pokemonArray.size(); i++)
                 {
                     System.out.print(" " + pokemonArray.get(i));
                 }
-                checkName:
+                System.out.println();
+                pokemonName = scan.nextLine();
                 //Checks if Pokemon name is valid
-                while (true)
+                while (!Pokemon.checkPokeName(pokemonName,pokemonArray))
                 {
+                    System.out.println("\nInvalid Pokemon, Try again");
                     pokemonName = scan.nextLine();
-                    for(int i = 0; i < pokemonArray.size(); i++)
-                    {
-                        if(pokemonName.equalsIgnoreCase(pokemonArray.get(i)))
-                        {
-                            pokemonName = pokemonArray.get(i);
-                            break checkName;
-                        }
-                    }
-                    System.out.println("Invalid Pokemon, Try again");
                 }
+                pokemonName = pokemonName.substring(0,1).toUpperCase()
+                + pokemonName.substring(1);
                 System.out.println("Cool, " + pokemonName + " is a strong one.");
                 break setup;
             }
