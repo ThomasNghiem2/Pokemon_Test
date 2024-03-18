@@ -51,7 +51,8 @@ public class Player
                 pokemon.hp = pokemon.maxHP;
             }
             potions--;
-            return "Success! " + pokemon.name + " gained " + potionHealAmt + " hp!";
+            return "Success! " + pokemon.name + " gained " + potionHealAmt + " hp! " + 
+                pokemon.name + " has " + pokemon.hp +" hp left";
         }
         else {
             return "Oh no, you're out of potions :(";
@@ -110,7 +111,7 @@ public class Player
             if(response.equals("2"))
             {
                 System.out.println(this.healPokemon(this.curr));  
-                System.out.println(this.name + " has " + this.potions + " potions left");
+                System.out.println(this.name + " has " + this.potions + " potion(s) left");
                 System.out.println(); 
             }
             //Player attack other Pokemon
