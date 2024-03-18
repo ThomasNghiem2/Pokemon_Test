@@ -79,9 +79,17 @@ class Game {
             Pokemon playerPokemon3 = new Pokemon(pokemonName3);
             Player player = new Player(playerName, playerPokemon1, playerPokemon2, playerPokemon3);
             System.out.println("Cool, your team of " + player.printTeam() + " is a strong one.");
-            int randPokemon1 = (int) (Math.random() * 3);
-            int randPokemon2 = (int) (Math.random() * 3);
-            int randPokemon3 = (int) (Math.random() * 3);
+            int randPokemon1 = (int) (Math.random() * pokemonArray.size());
+            int randPokemon2 = (int) (Math.random() * pokemonArray.size());
+            int randPokemon3 = (int) (Math.random() * pokemonArray.size());
+            while(randPokemon1 == randPokemon2)
+            {
+                randPokemon2 = (int) (Math.random() * pokemonArray.size());
+            }
+            while(randPokemon3 == randPokemon2 || randPokemon3 == randPokemon1)
+            {
+                randPokemon3 = (int) (Math.random() * pokemonArray.size());
+            }
             Pokemon computerPokemon1 = new Pokemon(pokemonArray.get(randPokemon1));
             Pokemon computerPokemon2 = new Pokemon(pokemonArray.get(randPokemon2));
             Pokemon computerPokemon3 = new Pokemon(pokemonArray.get(randPokemon3));

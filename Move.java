@@ -118,5 +118,4 @@ public class Move {
         return name;
 
     }
-    
 }

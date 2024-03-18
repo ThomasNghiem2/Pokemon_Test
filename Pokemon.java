@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Pokemon {
     String name;
     double hp;
+    double maxHP;
     String type;
     MoveSet moveSet;
     //Creates Pokemon objects
@@ -164,6 +165,7 @@ public class Pokemon {
         if (str.equalsIgnoreCase("Charmander")) {
             this.name = "Charmander";
             this.hp = 10;
+            this.maxHP = 10;
             this.type = "Fire";
             moveSet = new MoveSet("charmander");
             System.out.println(charmanderArt);
@@ -171,6 +173,7 @@ public class Pokemon {
         if (str.equalsIgnoreCase("Bulbasaur")) {
             this.name = "Bulbasaur";
             this.hp = 10;
+            this.maxHP = 10;
             this.type = "Grass";
             moveSet = new MoveSet("bulbasaur");
             System.out.println(bulbasaurArt);
@@ -178,6 +181,7 @@ public class Pokemon {
         if (str.equalsIgnoreCase("Squirtle")) {
             this.name = "Squirtle";
             this.hp = 10;
+            this.maxHP = 10;
             this.type = "Water";
             moveSet = new MoveSet("squirtle");
             System.out.println(squirtleArt);
@@ -185,6 +189,7 @@ public class Pokemon {
         if (str.equalsIgnoreCase("Snorlax")) {
             this.name = "Snorlax";
             this.hp = 15;
+            this.maxHP = 15;
             this.type = "Normal";
             moveSet = new MoveSet("snorlax");
             System.out.println(snorlaxArt);
@@ -250,36 +255,24 @@ public class Pokemon {
         }
         return 1;
     }
-    //Conducts a Pokemon battle
-    public String pokemonBattle(Pokemon otherPokemon) {
+    //Player attacks the computer
+    public void pokemonBattle(Pokemon otherPokemon) {
         java.util.Scanner scan = new Scanner(System.in);
-        while (this.hp > 0 && otherPokemon.hp > 0) {
+        System.out.println();
+        System.out.println("What move do you want to use?");
+        System.out.println("Your moves are " + this.moveSet.moveList[0] + ", " 
+        + this.moveSet.moveList[1] + ", " + this.moveSet.moveList[2] + ", " 
+        + this.moveSet.moveList[3]);
+        String playerMove = scan.nextLine();
+        System.out.println();
+        while (checkMoveValid(playerMove) == false) 
+        {
+            System.out.println("Invalid move, try again. Enter valid move \n");
+            playerMove = scan.nextLine();
             System.out.println();
-            System.out.println("What move do you want to use?");
-            System.out.println("Your moves are " + this.moveSet.moveList[0] + ", " 
-            + this.moveSet.moveList[1] + ", " + this.moveSet.moveList[2] + ", " 
-            + this.moveSet.moveList[3]);
-            String playerMove = scan.nextLine();
-            System.out.println();
-            while (checkMoveValid(playerMove) == false) {
-                System.out.println("Invalid move, try again. Enter valid move \n");
-                playerMove = scan.nextLine();
-                System.out.println();
-            }
-            this.attack(otherPokemon, playerMove);
-            System.out.println();
-            int randAttack = (int) (Math.random() * 4) ;
-            otherPokemon.attack(this, otherPokemon.moveSet.moveList[randAttack].name);
         }
-        if (this.hp == 0 && otherPokemon.hp == 0) {
-            return "You Tied! Do you want to try again? (type q if you are done, anything else to play again)";
-        }
-        else if (otherPokemon.hp == 0) {
-            return "Congratulations! You won! Do you want to play again? (type q if you are done, anything else to play again)";
-        }
-        else {
-            return "Oh No! You Lost! Do you want to try again? (type q if you are done, anything else to play again)";
-        }
+        this.attack(otherPokemon, playerMove);
+        System.out.println();
     }
     
     //Checks that all moves are valid
