@@ -281,19 +281,29 @@ public class Pokemon {
         this.attack(otherPokemon, playerMove);
         System.out.println();
     }
-    
-    //Checks that all moves are valid
+    //Checks that move is valid
     public boolean checkMoveValid(String move) {
         return move.equalsIgnoreCase(moveSet.moveList[0].name) || move.equalsIgnoreCase(moveSet.moveList[1].name) ||
             move.equalsIgnoreCase(moveSet.moveList[2].name) || move.equalsIgnoreCase(moveSet.moveList[3].name);
     }
-
-    //Checks that Pokemon names are valid
-    public static boolean checkPokeName(String name, ArrayList<String> Pokemons)
+    //Checks that Pokemon pokemon list is valid
+    public static boolean checkPokeName(String name, ArrayList<Pokemon> pokemon)
     {
-        for(int i = 0; i < Pokemons.size(); i++)
+        for(int i = 0; i < pokemon.size(); i++)
         {
-            if(Pokemons.get(i).equalsIgnoreCase(name))
+            if(pokemon.get(i).name.equalsIgnoreCase(name))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    //Checks that Pokemon String list is valid
+    public static boolean checkPokeNameString(String name, ArrayList<String> pokemon)
+    {
+        for(int i = 0; i < pokemon.size(); i++)
+        {
+            if(pokemon.get(i).equalsIgnoreCase(name))
             {
                 return true;
             }

@@ -47,21 +47,21 @@ class Game {
                 }
                 System.out.println();
                 pokemonName1 = scan.nextLine();
-                while (!Pokemon.checkPokeName(pokemonName1,pokemonArray))
+                while (!Pokemon.checkPokeNameString(pokemonName1,pokemonArray))
                 {
                     System.out.println("\nInvalid Pokemon 1, Try again");
                     pokemonName1 = scan.nextLine();
                 }
                 System.out.println("\nPerfect, what's your next Pokemon?");
                 pokemonName2 = scan.nextLine();
-                while (!Pokemon.checkPokeName(pokemonName2,pokemonArray))
+                while (!Pokemon.checkPokeNameString(pokemonName2,pokemonArray))
                 {
                     System.out.println("\nInvalid Pokemon 2, Try again");
                     pokemonName2 = scan.nextLine();
                 }
                 System.out.println("\nPerfect, what's your next Pokemon?");
                 pokemonName3 = scan.nextLine();
-                while (!Pokemon.checkPokeName(pokemonName3,pokemonArray))
+                while (!Pokemon.checkPokeNameString(pokemonName3,pokemonArray))
                 {
                     System.out.println("\nInvalid Pokemon 3, Try again");
                     pokemonName3 = scan.nextLine();

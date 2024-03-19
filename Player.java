@@ -34,10 +34,6 @@ public class Player
         {
             return "This Pokemon has fainted";
         }
-        if(this.curr.name.equalsIgnoreCase(desiredPokemon.name))
-        {
-            return "Pokemon is in play, please try again!"; 
-        }
         for (Pokemon p: team) {
             if (desiredPokemon.name.equalsIgnoreCase(p.name)) {
                 curr = p;
@@ -63,11 +59,11 @@ public class Player
         }
     }
     //Returns Pokemon from its name
-    public Pokemon nameToPokemon(String pokename)
+    public Pokemon nameToPokemon(String pokemon)
     {
         for(int i = 0; i < team.length; i++)
         {
-            if(team[i].name.equalsIgnoreCase(pokename))
+            if(team[i].name.equalsIgnoreCase(pokemon))
             {
                 return team[i];
             }
@@ -75,7 +71,7 @@ public class Player
         return null;
     }
     //Returns alive Pokemon
-    public ArrayList returnAlive(Pokemon[] team)
+    public ArrayList<Pokemon> returnAlive(Pokemon[] team)
     {
         ArrayList<Pokemon> alive = new ArrayList<>();
         for(int i = 0; i < team.length; i++)
@@ -89,7 +85,21 @@ public class Player
     }
     //Prints team
     public String printTeam() {
-        return team[0].name + ", " + team[1].name + ", and " + team[2].name;
+        return team[0].name + ", " + team[1].name + ", and " 
+            + team[2].name;
+    }
+    //Prints available switch Pokemon
+    public String printSwitchAvailable(Player player)
+    {
+        String returnString = "You can switch to ";
+        for(int i = 0; i < player.team.length; i++)
+        {
+            if(!this.team[i].equals(curr) && team[i].alive)
+            {
+                returnString += this.team[i].name + " ";
+            }
+        }
+        return returnString;
     }
     //Checks if the team is alive
     public boolean teamAlive(Player player)
@@ -103,8 +113,8 @@ public class Player
         }
         return false;
     }
-    //Ensures string option is correct.
-    public boolean ChoiceChecker (String response)
+    //Ensures intial option is correct.
+    public boolean choiceChecker (String response)
     {
         if(!response.equals("1") && 
             !response.equals("2") &&
@@ -114,17 +124,70 @@ public class Player
             }
         return false;
     }
+    //Returns available Pokemon to switch to
+    public ArrayList<Pokemon> returnSwitchAvailablePokemon (Player player)
+    {
+        ArrayList<Pokemon> availablePokemon = new ArrayList<>();
+        for(int i = 0; i < this.team.length; i++)
+        {            
+            if(!this.team[i].equals(this.curr) && this.team[i].alive)
+            {
+                availablePokemon.add(this.team[i]);
+            }
+        }
+        return availablePokemon;
+    }
+    //When Cpu switches Pokemon
+    public void cpuSwitch (ArrayList<Pokemon> pokemons)
+    {
+        if(!(pokemons.size() > 0))
+        {
+            System.out.println("Thomas is unable to switch Pokemons");
+        }
+        else
+        {
+            int randPoke = (int) (Math.random() * pokemons.size());
+            this.selectPokemon(pokemons.get(randPoke));
+            System.out.println("Thomas has switched to " + this.curr.name);
+        }
+    }
+    //Heal process
+    public void healProcess ()
+    {
+        if(this.potions == 0)
+        {
+            System.out.println(this.name + " ran out of potions");
+        }
+        else            
+        {
+            System.out.println(this.healPokemon(this.curr));
+            System.out.println(this.name + " has " + this.potions + " potions left");
+        }
+    }
+    //Player switching process
+    public String playerSwitchProcess (Player player, ArrayList<Pokemon> list)
+    {
+        Scanner scan = new Scanner(System.in);
+        System.out.print(printSwitchAvailable(this));
+        System.out.println();
+        String switchPoke = scan.nextLine();
+        //Errror Checking
+        while(!Pokemon.checkPokeName(switchPoke,list) ||
+            nameToPokemon(switchPoke).equals(curr)) 
+        {
+            System.out.println("Invalid!");
+            switchPoke = scan.nextLine();
+        }
+        System.out.println();
+        return(selectPokemon(this.nameToPokemon(switchPoke)));
+    }
     //The Player battle
     public String playerBattle(Player other) {
         battleLoop:
-        while (teamAlive(this) && teamAlive(other))
+        while (true)
         {
             //Beginning of round
-            ArrayList<String> teamArrayList = new ArrayList<>();    
-            for(int i = 0; i < team.length; i++)
-            {
-                teamArrayList.add(team[i].name);
-            }
+            ArrayList<Pokemon> teamArrayList = returnAlive(this.team);
             System.out.println();
             System.out.println(this.name + " turn:");
             System.out.println("Your current Pokemon is " + curr.name + " and it has " + curr.hp + " hp left" );
@@ -134,7 +197,7 @@ public class Player
             System.out.println();
             String response = scan.nextLine();
             //Error Checking
-            if(ChoiceChecker(response))
+            if(choiceChecker(response))
             {
                 System.out.println("Invalid input, try again!");
                 response = scan.nextLine();
@@ -142,45 +205,20 @@ public class Player
             //Player Switches Pokemon
             if(response.equals("1"))
             {
-                System.out.print("You can switch to ");
-                //Prints available pokemon
-                for(int i = 0; i < team.length; i++)
-                {
-                    if(!team[i].equals(curr) && team[i].alive)
-                    {
-                        System.out.print(team[i].name + " ");
-                    }
-                }
-                System.out.println();
-                String switchPoke = scan.nextLine();
-                //Errror Checking
-                while(!Pokemon.checkPokeName(switchPoke,teamArrayList)) 
-                {
-                    System.out.println("Invalid!");
-                    switchPoke = scan.nextLine();
-                }
-                System.out.println();
-                System.out.println(selectPokemon(this.nameToPokemon(switchPoke)));
+                System.out.println(playerSwitchProcess(this, teamArrayList));
                 System.out.println();
             }
             //Heals Pokemon
             if(response.equals("2"))
             {
-                if(this.potions == 0)
-                {
-                    System.out.println(this.name + " has ran out of potions");
-                }
-                else
-                {
-                    System.out.println(this.healPokemon(this.curr));
-                    System.out.println(this.name +  " has " + this.potions + " potions left");
-                }
+                this.healProcess();
                 System.out.println(); 
             }
             //Player attack other Pokemon
             if(response.equals("3"))
             {
-                curr.pokemonBattle(other.curr);  
+                curr.pokemonBattle(other.curr); 
+                //Checks if computer Pokemon fainted 
                 if(!other.curr.alive)
                 {
                     System.out.println(other.curr.name + " has fainted.");
@@ -189,18 +227,15 @@ public class Player
                     {
                         break battleLoop;
                     }
-                    ArrayList alivePokemon = returnAlive(other.team);
-                    int randPoke = (int) (Math.random() * alivePokemon.size());
-                    other.selectPokemon((Pokemon) alivePokemon.get(randPoke));
-                    System.out.println("Thomas has switched to " + other.curr.name);
+                    ArrayList<Pokemon> alivePokemon = returnAlive(other.team);
+                    other.cpuSwitch(alivePokemon);
                     System.out.println();
                 }     
             } 
             //CPU's Turn
             int cpuChoice = (int) (Math.random() * 3) + 1 ;
             System.out.println("Thomas turn:");
-            System.out.println("Thomas's Pokemon is " + other.curr.name + " and it has " + other.curr.hp + " left" );
-            System.out.println();
+            System.out.println("Thomas's Pokemon is " + other.curr.name + " and it has " + other.curr.hp + " left\n");
             //Forces CPU to switch if their Pokemon faints
             if(!other.curr.alive)
             {
@@ -209,40 +244,13 @@ public class Player
             //CPU switches
             if(cpuChoice == 1)
             {
-                ArrayList<Pokemon> availableCPUPokemon = new ArrayList<>();
-                //Adds only available Pokemon
-                for(int i = 0; i < other.team.length; i++)
-                {
-                    
-                    if(!other.team[i].equals(other.curr) && other.team[i].alive)
-                    {
-                        availableCPUPokemon.add(other.team[i]);
-                    }
-                }
-                //Only allows switches if there is a possible Pokemon to switch to
-                if(availableCPUPokemon.size() > 0)
-                {
-                    int cpuSwitchPoke = (int) (Math.random() * availableCPUPokemon.size());
-                    other.selectPokemon(availableCPUPokemon.get(cpuSwitchPoke));
-                    System.out.println("Thomas switched to " + other.curr.name);
-                }
-                else
-                {
-                    System.out.println("Thomas is unable to switch Pokemons");
-                }
+                ArrayList<Pokemon> availableCPUPokemon = returnSwitchAvailablePokemon(other);
+                other.cpuSwitch(availableCPUPokemon);
             } 
             //CPU heals
             if(cpuChoice == 2)
             {
-                if(other.potions == 0)
-                {
-                    System.out.println("Thomas ran out of potions");
-                }
-                else
-                {
-                    System.out.println(other.healPokemon(other.curr));
-                    System.out.println("Thomas has " + other.potions + " potions left");
-                }
+                other.healProcess();
             }
             //CPU attacks
             if(cpuChoice == 3)
@@ -259,25 +267,7 @@ public class Player
                     {
                         break battleLoop;
                     }
-                    System.out.print("You can switch to ");
-                    for(int i = 0; i < team.length; i++)
-                    {
-                        if(!team[i].equals(curr) && team[i].alive)
-                        {
-                            System.out.print(team[i].name + " ");
-                        }
-                    }
-                    System.out.println();
-                    String switchPoke = scan.nextLine();
-                    //Error Checking
-                    while(!Pokemon.checkPokeName(switchPoke,teamArrayList) || 
-                        switchPoke.equalsIgnoreCase(this.curr.name)) 
-                    {
-                        System.out.println("Invalid, try again!");
-                        switchPoke = scan.nextLine();
-                    }
-                    System.out.println();
-                    System.out.println(selectPokemon(this.nameToPokemon(switchPoke)));
+                    System.out.println(playerSwitchProcess(this, teamArrayList));
                     System.out.println();   
                 }
             }      
@@ -294,4 +284,3 @@ public class Player
         }
     }
 }
-
