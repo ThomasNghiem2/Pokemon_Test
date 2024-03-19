@@ -15,6 +15,7 @@ public class Pokemon {
     double hp;
     double maxHP;
     String type;
+    boolean alive;
     MoveSet moveSet;
     //Creates Pokemon objects
     public Pokemon(String str) {
@@ -167,6 +168,7 @@ public class Pokemon {
             this.hp = 10;
             this.maxHP = 10;
             this.type = "Fire";
+            this.alive = true;
             moveSet = new MoveSet("charmander");
             System.out.println(charmanderArt);
         }
@@ -175,6 +177,7 @@ public class Pokemon {
             this.hp = 10;
             this.maxHP = 10;
             this.type = "Grass";
+            this.alive = true;
             moveSet = new MoveSet("bulbasaur");
             System.out.println(bulbasaurArt);
         }
@@ -183,6 +186,7 @@ public class Pokemon {
             this.hp = 10;
             this.maxHP = 10;
             this.type = "Water";
+            this.alive = true;
             moveSet = new MoveSet("squirtle");
             System.out.println(squirtleArt);
         }
@@ -191,6 +195,7 @@ public class Pokemon {
             this.hp = 15;
             this.maxHP = 15;
             this.type = "Normal";
+            this.alive = true;
             moveSet = new MoveSet("snorlax");
             System.out.println(snorlaxArt);
         }
@@ -226,11 +231,13 @@ public class Pokemon {
         otherPokemon.hp -= damage;
         otherPokemon.hp = Math.round(otherPokemon.hp * 10.0) / 10.0;
         //Doesn't allow negative numbers
-        if (this.hp < 0) {
+        if (this.hp <= 0) {
             this.hp = 0;
+            this.alive = false;
         }
-        if (otherPokemon.hp < 0) {
+        if (otherPokemon.hp <= 0) {
             otherPokemon.hp = 0;
+            otherPokemon.alive = false;
         }
         System.out.println(this.name + " used " + moveSet.moveList[attackNumber].name + " against " + 
         otherPokemon.name + "\n" + otherPokemon.name + " took " + damage + " damage and has " + 
