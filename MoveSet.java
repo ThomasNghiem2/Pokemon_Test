@@ -60,5 +60,38 @@ public class MoveSet
             moveList[2] = move3;
             moveList[3] = move4;
         }
+        if(str.equalsIgnoreCase("eevee"))
+        {
+            Move move1 = new Move ("Tail Whip");
+            Move move2 = new Move ("Tackle");
+            Move move3 = new Move ("Swift");
+            Move move4 = new Move ("Take Down");
+            moveList[0] = move1;
+            moveList[1] = move2;
+            moveList[2] = move3;
+            moveList[3] = move4;
+        }
+        if(str.equalsIgnoreCase("eevee"))
+        {
+            Move move1 = new Move ("Tail Whip");
+            Move move2 = new Move ("Thunder Shock");
+            Move move3 = new Move ("Electro Ball");
+            Move move4 = new Move ("Thunder");
+            moveList[0] = move1;
+            moveList[1] = move2;
+            moveList[2] = move3;
+            moveList[3] = move4;
+        }
+        if(str.equalsIgnoreCase("mewtwo"))
+        {
+            Move move1 = new Move ("Disable");
+            Move move2 = new Move ("Psycho Cut");
+            Move move3 = new Move ("Psychic");
+            Move move4 = new Move ("Psystrike");
+            moveList[0] = move1;
+            moveList[1] = move2;
+            moveList[2] = move3;
+            moveList[3] = move4;
+        }
     }
 }

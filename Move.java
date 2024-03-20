@@ -111,6 +111,93 @@ public class Move {
             int range = 2;
             attack = (int) (Math.random() * range) + 1;
         }
+        //Eevee Moves
+        if(str.equalsIgnoreCase("Tail Whip"))
+        {
+            name = "Tail Whip";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 1;
+        }
+        if(str.equalsIgnoreCase("Tackle"))
+        {
+            name = "Tackle";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 1;
+        }
+        if(str.equalsIgnoreCase("Swift"))
+        {
+            name = "Swift";
+            type = "Normal";
+            int range = 3;
+            attack = (int) (Math.random() * range) + 3;
+        }
+        if(str.equalsIgnoreCase("Take Down"))
+        {
+            name = "Take Down";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 4;
+        }
+        //Pikachu Moves
+        if(str.equalsIgnoreCase("Tail Whip"))
+        {
+            name = "Tail Whip";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 1;
+        }
+        if(str.equalsIgnoreCase("Thunder Shock"))
+        {
+            name = "Thunder Shock";
+            type = "Electric";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 2;
+        }
+        if(str.equalsIgnoreCase("Electro Ball"))
+        {
+            name = "Electro Ball";
+            type = "Electric";
+            int range = 3;
+            attack = (int) (Math.random() * range) + 3;
+        }
+        if(str.equalsIgnoreCase("Thunder"))
+        {
+            name = "Thunder";
+            type = "Electric";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 4;
+        }
+        //Mewtwo Moves
+        if(str.equalsIgnoreCase("Disable"))
+        {
+            name = "Disable";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 3;
+        }
+        if(str.equalsIgnoreCase("Psycho Cut"))
+        {
+            name = "Psycho Cut";
+            type = "Psychich";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 5;
+        }
+        if(str.equalsIgnoreCase("Psychic"))
+        {
+            name = "Psychic";
+            type = "Psychic";
+            int range = 3;
+            attack = (int) (Math.random() * range) + 6;
+        }
+        if(str.equalsIgnoreCase("Psystrike"))
+        {
+            name = "Psystrike";
+            type = "Psychic";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 12;
+        }
     }
     //Returns name of the Pokemon when printed
     public String toString()
