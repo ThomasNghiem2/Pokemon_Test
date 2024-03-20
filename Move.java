@@ -180,7 +180,7 @@ public class Move {
         if(str.equalsIgnoreCase("Psycho Cut"))
         {
             name = "Psycho Cut";
-            type = "Psychich";
+            type = "Psychic";
             int range = 2;
             attack = (int) (Math.random() * range) + 5;
         }

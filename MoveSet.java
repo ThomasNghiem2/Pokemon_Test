@@ -71,7 +71,7 @@ public class MoveSet
             moveList[2] = move3;
             moveList[3] = move4;
         }
-        if(str.equalsIgnoreCase("eevee"))
+        if(str.equalsIgnoreCase("pikachu"))
         {
             Move move1 = new Move ("Tail Whip");
             Move move2 = new Move ("Thunder Shock");

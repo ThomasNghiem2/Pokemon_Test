@@ -7,6 +7,8 @@ This file is the main method that runs the game.
 */
 import java.io.*;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.ArrayList;
 /**
  * This class sets up the game variables and runs the game, while
@@ -14,6 +16,19 @@ import java.util.ArrayList;
  */
 class Game {
     public static void main(String[] args) throws Exception{
+        //Timer
+        // Timer timer = new Timer();
+        // timer.schedule(new TimerTask() 
+        // { 
+        //     @Override  
+        //     public void run() {
+        //     System.out.println("");}
+        // },  2000);
+    
+
+
+
+
         //Variables and Objects 
         String playerName = "";
         String pokemonName1, pokemonName2, pokemonName3 = "";
@@ -38,6 +53,7 @@ class Game {
             {
                 System.out.println("Welcome to Pokemon Battle! What is your name?");
                 playerName = scan.nextLine();
+                Thread.sleep(500);
                 System.out.print("\nHi " + playerName + 
                     ", what Pokemon do you want to use? (choose 3 Pokemon, press Enter after each one)"
                      + "\n" + "You can choose");
@@ -79,6 +95,7 @@ class Game {
             Pokemon playerPokemon3 = new Pokemon(pokemonName3);
             Player player = new Player(playerName, playerPokemon1, playerPokemon2, playerPokemon3);
             System.out.println("Cool, your team of " + player.printTeam() + " is a strong one.");
+            Thread.sleep(2500);
             int randPokemon1 = (int) (Math.random() * pokemonArray.size());
             int randPokemon2 = (int) (Math.random() * pokemonArray.size());
             int randPokemon3 = (int) (Math.random() * pokemonArray.size());
@@ -95,6 +112,7 @@ class Game {
             Pokemon computerPokemon3 = new Pokemon(pokemonArray.get(randPokemon3));
             Player cpPlayer = new Player("Thomas", computerPokemon1, computerPokemon2, computerPokemon3);
             System.out.println("Your opponent is Thomas and his team of " + cpPlayer.printTeam());
+            Thread.sleep(2000);
             System.out.println(player.playerBattle(cpPlayer));
             System.out.println();
             System.out.println();

@@ -182,7 +182,7 @@ public class Player
         return(selectPokemon(this.nameToPokemon(switchPoke)));
     }
     //The Player battle
-    public String playerBattle(Player other) {
+    public String playerBattle(Player other) throws Exception{
         battleLoop:
         while (true)
         {
@@ -207,12 +207,14 @@ public class Player
             {
                 System.out.println(playerSwitchProcess(this, teamArrayList));
                 System.out.println();
+                Thread.sleep(500);
             }
             //Heals Pokemon
             if(response.equals("2"))
             {
                 this.healProcess();
                 System.out.println(); 
+                Thread.sleep(500);
             }
             //Player attack other Pokemon
             if(response.equals("3"))
@@ -230,12 +232,14 @@ public class Player
                     ArrayList<Pokemon> alivePokemon = returnAlive(other.team);
                     other.cpuSwitch(alivePokemon);
                     System.out.println();
-                }     
+                }   
+                Thread.sleep(500);  
             } 
             //CPU's Turn
             int cpuChoice = (int) (Math.random() * 3) + 1 ;
             System.out.println("Thomas turn:");
             System.out.println("Thomas's Pokemon is " + other.curr.name + " and it has " + other.curr.hp + " left\n");
+            Thread.sleep(1000);
             //Forces CPU to switch if their Pokemon faints
             if(!other.curr.alive)
             {
@@ -246,11 +250,13 @@ public class Player
             {
                 ArrayList<Pokemon> availableCPUPokemon = returnSwitchAvailablePokemon(other);
                 other.cpuSwitch(availableCPUPokemon);
+                Thread.sleep(500);
             } 
             //CPU heals
             if(cpuChoice == 2)
             {
                 other.healProcess();
+                Thread.sleep(500);
             }
             //CPU attacks
             if(cpuChoice == 3)
@@ -270,6 +276,7 @@ public class Player
                     System.out.println(playerSwitchProcess(this, teamArrayList));
                     System.out.println();   
                 }
+                Thread.sleep(500);
             }      
         }
         //End of game check 

@@ -461,7 +461,6 @@ public class Pokemon {
         {
             System.out.println("Invalid move, try again. Enter valid move \n");
             playerMove = scan.nextLine();
-            System.out.println();
         }
         this.attack(otherPokemon, playerMove);
         System.out.println();
