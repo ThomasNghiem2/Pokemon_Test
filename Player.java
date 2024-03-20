@@ -128,11 +128,11 @@ public class Player
     public ArrayList<Pokemon> returnSwitchAvailablePokemon (Player player)
     {
         ArrayList<Pokemon> availablePokemon = new ArrayList<>();
-        for(int i = 0; i < this.team.length; i++)
+        for(int i = 0; i < player.team.length; i++)
         {            
-            if(!this.team[i].equals(this.curr) && this.team[i].alive)
+            if(!player.team[i].equals(player.curr) && player.team[i].alive)
             {
-                availablePokemon.add(this.team[i]);
+                availablePokemon.add(player.team[i]);
             }
         }
         return availablePokemon;
@@ -194,8 +194,8 @@ public class Player
             System.out.println();
             System.out.println("What do you want to do? (Enter 1 to switch Pokemon, 2 to heal, 3 to battle)");
             Scanner scan = new Scanner(System.in);
-            System.out.println();
             String response = scan.nextLine();
+            System.out.println();
             //Error Checking
             if(choiceChecker(response))
             {
@@ -207,14 +207,14 @@ public class Player
             {
                 System.out.println(playerSwitchProcess(this, teamArrayList));
                 System.out.println();
-                Thread.sleep(500);
+                Thread.sleep(1000);
             }
             //Heals Pokemon
             if(response.equals("2"))
             {
                 this.healProcess();
                 System.out.println(); 
-                Thread.sleep(500);
+                Thread.sleep(1000);
             }
             //Player attack other Pokemon
             if(response.equals("3"))
@@ -227,13 +227,14 @@ public class Player
                     //Checks for battle ending
                     if (!teamAlive(other)) 
                     {
+                        Thread.sleep(1000);  
                         break battleLoop;
                     }
                     ArrayList<Pokemon> alivePokemon = returnAlive(other.team);
                     other.cpuSwitch(alivePokemon);
                     System.out.println();
                 }   
-                Thread.sleep(500);  
+                Thread.sleep(1000);  
             } 
             //CPU's Turn
             int cpuChoice = (int) (Math.random() * 3) + 1 ;
@@ -250,13 +251,13 @@ public class Player
             {
                 ArrayList<Pokemon> availableCPUPokemon = returnSwitchAvailablePokemon(other);
                 other.cpuSwitch(availableCPUPokemon);
-                Thread.sleep(500);
+                Thread.sleep(700);
             } 
             //CPU heals
             if(cpuChoice == 2)
             {
                 other.healProcess();
-                Thread.sleep(500);
+                Thread.sleep(700);
             }
             //CPU attacks
             if(cpuChoice == 3)
@@ -271,12 +272,13 @@ public class Player
                     //Checks for battle ending
                     if (!teamAlive(this)) 
                     {
+                        Thread.sleep(1000);  
                         break battleLoop;
                     }
                     System.out.println(playerSwitchProcess(this, teamArrayList));
                     System.out.println();   
                 }
-                Thread.sleep(500);
+                Thread.sleep(700);
             }      
         }
         //End of game check 

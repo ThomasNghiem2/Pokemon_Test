@@ -113,12 +113,11 @@ class Game {
             Player cpPlayer = new Player("Thomas", computerPokemon1, computerPokemon2, computerPokemon3);
             System.out.println("Your opponent is Thomas and his team of " + cpPlayer.printTeam());
             Thread.sleep(2000);
-            System.out.println(player.playerBattle(cpPlayer));
-            System.out.println();
-            System.out.println();
+            System.out.println("\n" + player.playerBattle(cpPlayer));
             //Play Again
             if(scan.nextLine().equals("q"))
             {
+                Thread.sleep(700);
                 System.out.println("Thank you for playing");
                 System.exit(0);
             }
