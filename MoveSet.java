@@ -52,9 +52,9 @@ public class MoveSet
         if(str.equalsIgnoreCase("snorlax"))
         {
             Move move1 = new Move ("Belly Drum");
-            Move move2 = new Move ("Belly Drum");
-            Move move3 = new Move ("Belly Drum");
-            Move move4 = new Move ("Belly Drum");
+            Move move2 = new Move ("Tackle");
+            Move move3 = new Move ("Body Slam");
+            Move move4 = new Move ("Giga Impact");
             moveList[0] = move1;
             moveList[1] = move2;
             moveList[2] = move3;

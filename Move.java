@@ -111,6 +111,27 @@ public class Move {
             int range = 2;
             attack = (int) (Math.random() * range) + 1;
         }
+        if(str.equalsIgnoreCase("Tackle"))
+        {
+            name = "Tackle";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 1;
+        }
+        if(str.equalsIgnoreCase("Body Slam"))
+        {
+            name = "Body Slam";
+            type = "Normal";
+            int range = 3;
+            attack = (int) (Math.random() * range) + 3;
+        }
+        if(str.equalsIgnoreCase("Giga Impact"))
+        {
+            name = "Giga Impact";
+            type = "Normal";
+            int range = 2;
+            attack = (int) (Math.random() * range) + 6;
+        }
         //Eevee Moves
         if(str.equalsIgnoreCase("Tail Whip"))
         {
