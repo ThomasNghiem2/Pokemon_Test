@@ -448,7 +448,7 @@ public class Pokemon {
         return 1;
     }
     //Player attacks the computer
-    public void pokemonBattle(Pokemon otherPokemon) {
+    public void pokemonFight(Pokemon otherPokemon) {
         java.util.Scanner scan = new Scanner(System.in);
         System.out.println();
         System.out.println("What move do you want to use?");
@@ -459,9 +459,10 @@ public class Pokemon {
         System.out.println();
         while (checkMoveValid(playerMove) == false) 
         {
-            System.out.println("Invalid move, try again. Enter valid move \n");
+            System.out.println("Invalid move, try again. Enter valid move");
             playerMove = scan.nextLine();
         }
+        System.out.println();
         this.attack(otherPokemon, playerMove);
         System.out.println();
     }
