@@ -81,7 +81,7 @@ class Game {
             Pokemon playerPokemon3 = new Pokemon(pokemonName3);
             Player player = new Player(playerName, playerPokemon1, playerPokemon2, playerPokemon3);
             System.out.println("Cool, your team of " + player.printTeam() + " is a strong one.");
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             int randPokemon1 = (int) (Math.random() * pokemonArray.size());
             int randPokemon2 = (int) (Math.random() * pokemonArray.size());
             int randPokemon3 = (int) (Math.random() * pokemonArray.size());

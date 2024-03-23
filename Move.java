@@ -70,7 +70,7 @@ public class Move {
         if(str.equalsIgnoreCase("Solar Beam"))
         {
             name = "Solar Beam";
-            type = "Fire";
+            type = "Grass";
             int range = 2;
             attack = (int) (Math.random() * range) + 4;
         }
@@ -111,13 +111,7 @@ public class Move {
             int range = 2;
             attack = (int) (Math.random() * range) + 1;
         }
-        if(str.equalsIgnoreCase("Tackle"))
-        {
-            name = "Tackle";
-            type = "Normal";
-            int range = 2;
-            attack = (int) (Math.random() * range) + 1;
-        }
+        //Tackle Already Present
         if(str.equalsIgnoreCase("Body Slam"))
         {
             name = "Body Slam";
@@ -133,20 +127,8 @@ public class Move {
             attack = (int) (Math.random() * range) + 6;
         }
         //Eevee Moves
-        if(str.equalsIgnoreCase("Tail Whip"))
-        {
-            name = "Tail Whip";
-            type = "Normal";
-            int range = 2;
-            attack = (int) (Math.random() * range) + 1;
-        }
-        if(str.equalsIgnoreCase("Tackle"))
-        {
-            name = "Tackle";
-            type = "Normal";
-            int range = 2;
-            attack = (int) (Math.random() * range) + 1;
-        }
+        //Tail Whip already present
+        //Tackle already present
         if(str.equalsIgnoreCase("Swift"))
         {
             name = "Swift";
@@ -162,13 +144,7 @@ public class Move {
             attack = (int) (Math.random() * range) + 4;
         }
         //Pikachu Moves
-        if(str.equalsIgnoreCase("Tail Whip"))
-        {
-            name = "Tail Whip";
-            type = "Normal";
-            int range = 2;
-            attack = (int) (Math.random() * range) + 1;
-        }
+        //Tail Whip already present
         if(str.equalsIgnoreCase("Thunder Shock"))
         {
             name = "Thunder Shock";

@@ -199,7 +199,8 @@ public class Player
             ArrayList<Pokemon> teamArrayList = returnAlive(this.team);
             System.out.println();
             System.out.println(this.name + " turn:");
-            System.out.println("Your current Pokemon is " + curr.name + " and it has " + curr.hp + " hp left" );
+            System.out.println("Your current Pokemon is " + curr.name + " and it has " + curr.hp + " hp left. Thomas' "  
+                + "current Pokemon is " + other.curr.name + " and it has " + other.curr.hp + " hp left.");
             System.out.println();
             System.out.println("What do you want to do? (Enter 1 to switch Pokemon, 2 to heal, 3 to battle)");
             Scanner scan = new Scanner(System.in);

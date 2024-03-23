@@ -7,6 +7,7 @@ This file creates all of the Pokemon in the game.
 */
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 /**
  * This class creates all of the Pokemon in the game
  */
@@ -402,7 +403,8 @@ public class Pokemon {
             return;
         }
         double damage = moveSet.moveList[attackNumber].attack;
-        double multiplier = checkTyping(moveSet.moveList[attackNumber], otherPokemon);
+        //double multiplier = checkTyping(moveSet.moveList[attackNumber], otherPokemon);
+        double multiplier = typeAdvantage(moveSet.moveList[attackNumber], otherPokemon);
         String multiplierText = "";
         if(multiplier == 1.2)
         {
@@ -428,25 +430,6 @@ public class Pokemon {
         otherPokemon.name + "\n" + otherPokemon.name + " took " + damage + " damage and has " + 
         otherPokemon.hp + " hp left. " + multiplierText);
     }
-    //Checks for any type advantages
-    public double checkTyping(Move move, Pokemon pokemon)
-    {
-        String[] arrayTypes = {"Fire", "Grass", "Water"};
-        for(int i = 0; i < arrayTypes.length; i++)
-        {
-            if(move.type.equalsIgnoreCase(arrayTypes[i]) && 
-            pokemon.type.equalsIgnoreCase(arrayTypes[(i+1) % 3]))
-            {
-                return 1.2;
-            }
-            if(pokemon.type.equalsIgnoreCase(arrayTypes[i]) && 
-            move.type.equalsIgnoreCase(arrayTypes[(i+1) % 3]))
-            {
-                return 0.8;
-            }
-        }
-        return 1;
-    }
     //Player attacks the computer
     public void pokemonFight(Pokemon otherPokemon) {
         java.util.Scanner scan = new Scanner(System.in);
@@ -465,6 +448,233 @@ public class Pokemon {
         System.out.println();
         this.attack(otherPokemon, playerMove);
         System.out.println();
+    }
+    //Strong against HashMap Constructor
+    public HashMap<String,ArrayList<String>> strongAgainst()
+    {
+        HashMap<String,ArrayList<String>> strongAgainst = new HashMap<>();
+        ArrayList<String> normalStrong = new ArrayList<>();
+        normalStrong.add("None"); //Normal Type moves don't have advantages
+        strongAgainst.put("Normal", normalStrong);
+        ArrayList<String> fireStrong = new ArrayList<>();
+        fireStrong.add("Grass");
+        fireStrong.add("Ice");
+        fireStrong.add("Bug");
+        fireStrong.add("Steel");
+        strongAgainst.put("Fire", fireStrong);
+        ArrayList<String> waterStrong = new ArrayList<>();
+        waterStrong.add("Fire");
+        waterStrong.add("Ground");
+        waterStrong.add("Rock");
+        strongAgainst.put("Water", waterStrong);
+        ArrayList<String> electricStrong = new ArrayList<>();
+        electricStrong.add("Water");
+        electricStrong.add("Flying");
+        strongAgainst.put("Electric", electricStrong);
+        ArrayList<String> grassStrong = new ArrayList<>();
+        grassStrong.add("Water");
+        grassStrong.add("Ground");
+        grassStrong.add("Rock");
+        strongAgainst.put("Grass", grassStrong);
+        ArrayList<String> iceStrong = new ArrayList<>();
+        iceStrong.add("Grass");
+        iceStrong.add("Ground");
+        iceStrong.add("Flying");
+        iceStrong.add("Dragon");
+        strongAgainst.put("Ice", iceStrong);
+        ArrayList<String> fightingStrong = new ArrayList<>();
+        fightingStrong.add("Normal");
+        fightingStrong.add("Ice");
+        fightingStrong.add("Rock");
+        fightingStrong.add("Dark");
+        fightingStrong.add("Steel");
+        strongAgainst.put("Fighting", fightingStrong);
+        ArrayList<String> poisonStrong = new ArrayList<>();
+        poisonStrong.add("Grass");
+        poisonStrong.add("Fairy");
+        strongAgainst.put("Poison", poisonStrong);
+        ArrayList<String> groundStrong = new ArrayList<>();
+        groundStrong.add("Fire");
+        groundStrong.add("Electric");
+        groundStrong.add("Poison");
+        groundStrong.add("Rock");
+        groundStrong.add("Steel");
+        strongAgainst.put("Ground", groundStrong);
+        ArrayList<String> flyingStrong = new ArrayList<>();
+        flyingStrong.add("Grass");
+        flyingStrong.add("Fighting");
+        flyingStrong.add("Bug");
+        strongAgainst.put("Flying", flyingStrong);
+        ArrayList<String> psychicStrong = new ArrayList<>();
+        psychicStrong.add("Fighting");
+        psychicStrong.add("Poison");
+        strongAgainst.put("Psychic", psychicStrong);
+        ArrayList<String> bugStrong = new ArrayList<>();
+        bugStrong.add("Grass");
+        bugStrong.add("Psychic");
+        bugStrong.add("Dark");
+        strongAgainst.put("Bug", bugStrong);
+        ArrayList<String> rockStrong = new ArrayList<>();
+        rockStrong.add("Fire");
+        rockStrong.add("Ice");
+        rockStrong.add("Flying");
+        rockStrong.add("Bug");
+        strongAgainst.put("Rock", rockStrong);
+        ArrayList<String> ghostStrong = new ArrayList<>();
+        ghostStrong.add("Psychic");
+        ghostStrong.add("Ghost");
+        strongAgainst.put("Ghost", ghostStrong);
+        ArrayList<String> dragonStrong = new ArrayList<>();
+        dragonStrong.add("Dragon");
+        strongAgainst.put("Dragon", dragonStrong);
+        ArrayList<String> darkStrong = new ArrayList<>();
+        darkStrong.add("Psychic");
+        darkStrong.add("Ghost");
+        strongAgainst.put("Dark", darkStrong);
+        ArrayList<String> steelStrong = new ArrayList<>();
+        steelStrong.add("Rock");
+        steelStrong.add("Ice");
+        steelStrong.add("Fairy");
+        strongAgainst.put("Steel", steelStrong);
+        ArrayList<String> fairyStrong = new ArrayList<>();
+        fairyStrong.add("Fighting");
+        fairyStrong.add("Dragon");
+        fairyStrong.add("Dark");
+        strongAgainst.put("Fairy", fairyStrong);
+        return strongAgainst;
+    }
+    //Weak against HashMap constructor
+    public HashMap<String,ArrayList<String>> weakAgainst()
+    {
+        HashMap<String,ArrayList<String>> weakAgainst = new HashMap<>(); 
+        ArrayList<String> normalWeak = new ArrayList<>();
+        normalWeak.add("Rock");
+        normalWeak.add("Steel");
+        normalWeak.add("Ghost");
+        weakAgainst.put("Normal",normalWeak);
+        ArrayList<String> fireWeak = new ArrayList<>();
+        fireWeak.add("Fire");
+        fireWeak.add("Water");
+        fireWeak.add("Rock");
+        fireWeak.add("Dragon");
+        weakAgainst.put("Fire",fireWeak);
+        ArrayList<String> waterWeak = new ArrayList<>();
+        waterWeak.add("Grass");
+        waterWeak.add("Water");
+        waterWeak.add("Dragon");
+        weakAgainst.put("Water",waterWeak);
+        ArrayList<String> electricWeak = new ArrayList<>();
+        electricWeak.add("Electric");
+        electricWeak.add("Grass");
+        electricWeak.add("Dragon");
+        electricWeak.add("Ground");
+        weakAgainst.put("Electric",electricWeak);
+        ArrayList<String> grassWeak = new ArrayList<>();
+        grassWeak.add("Fire");
+        grassWeak.add("Grass");
+        grassWeak.add("Poison");
+        grassWeak.add("Flying");
+        grassWeak.add("Bug");
+        grassWeak.add("Dragon");
+        grassWeak.add("Steel");
+        weakAgainst.put("Grass",grassWeak);
+        ArrayList<String> iceWeak = new ArrayList<>();
+        iceWeak.add("Fire");
+        iceWeak.add("Water");
+        iceWeak.add("Ice");
+        iceWeak.add("Steel");
+        weakAgainst.put("Ice",iceWeak);
+        ArrayList<String> fightingWeak = new ArrayList<>();
+        fightingWeak.add("Poison");
+        fightingWeak.add("Flying");
+        fightingWeak.add("Psychic");
+        fightingWeak.add("Bug");
+        fightingWeak.add("Fairy");
+        fightingWeak.add("Ghost");
+        weakAgainst.put("Fighting",fightingWeak);
+        ArrayList<String> poisonWeak = new ArrayList<>();
+        poisonWeak.add("Poison");
+        poisonWeak.add("Ground");
+        poisonWeak.add("Rock");
+        poisonWeak.add("Ghost");
+        poisonWeak.add("Steel");
+        weakAgainst.put("Poison",poisonWeak);
+        ArrayList<String> groundWeak = new ArrayList<>();
+        groundWeak.add("Grass");
+        groundWeak.add("Bug");
+        groundWeak.add("Flying");
+        weakAgainst.put("Ground",groundWeak);
+        ArrayList<String> flyingWeak = new ArrayList<>();
+        flyingWeak.add("Electric");
+        flyingWeak.add("Rock");
+        flyingWeak.add("Steel");
+        weakAgainst.put("Flying",flyingWeak);
+        ArrayList<String> psychicWeak = new ArrayList<>();
+        psychicWeak.add("Psychic");
+        psychicWeak.add("Steel");
+        psychicWeak.add("Dark");
+        weakAgainst.put("Psychic",psychicWeak);
+        ArrayList<String> bugWeak = new ArrayList<>();
+        bugWeak.add("Fire");
+        bugWeak.add("Fighting");
+        bugWeak.add("Poison");
+        bugWeak.add("Flying");
+        bugWeak.add("Ghost");
+        bugWeak.add("Steel");
+        bugWeak.add("Fairy");
+        weakAgainst.put("Bug",bugWeak);
+        ArrayList<String> rockWeak = new ArrayList<>();
+        rockWeak.add("Fighting");
+        rockWeak.add("Ground");
+        rockWeak.add("Steel");
+        weakAgainst.put("Rock",rockWeak);
+        ArrayList<String> ghostWeak = new ArrayList<>();
+        ghostWeak.add("Dark");
+        ghostWeak.add("Normal");
+        weakAgainst.put("Ghost",ghostWeak);
+        ArrayList<String> dragonWeak = new ArrayList<>();
+        dragonWeak.add("Steel");
+        dragonWeak.add("Fairy");
+        weakAgainst.put("Dragon",dragonWeak);
+        ArrayList<String> darkWeak = new ArrayList<>();
+        darkWeak.add("Fighting");
+        darkWeak.add("Dark");
+        darkWeak.add("Fairy");
+        weakAgainst.put("Dark",darkWeak);
+        ArrayList<String> steelWeak = new ArrayList<>();
+        steelWeak.add("Fire");
+        steelWeak.add("Water");
+        steelWeak.add("Electric");
+        steelWeak.add("Steel");
+        weakAgainst.put("Steel",steelWeak);
+        ArrayList<String> fairyWeak = new ArrayList<>();
+        fairyWeak.add("Fire");
+        fairyWeak.add("Poison");
+        fairyWeak.add("Steel");
+        weakAgainst.put("Fairy",fairyWeak);
+        return weakAgainst;
+    }
+    //Type advantage checker
+    public double typeAdvantage(Move move, Pokemon pokemon)
+    {
+        HashMap<String,ArrayList<String>> strongHash = strongAgainst();
+        HashMap<String,ArrayList<String>> weakHash = weakAgainst();
+
+        for(int i = 0; i < strongHash.get(move.type).size(); i++)
+        {
+            if(strongHash.get(move.type).get(i).equalsIgnoreCase(pokemon.type))
+            {
+                return 1.2;
+            }
+        }
+        for(int j = 0; j < weakHash.get(move.type).size(); j++)
+        {
+            if(weakHash.get(move.type).get(j).equalsIgnoreCase(pokemon.type))
+            {
+                return 0.8;
+            }
+        }
+        return 1.0;
     }
     //Checks that move is valid
     public boolean checkMoveValid(String move) {
