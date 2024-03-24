@@ -408,11 +408,11 @@ public class Pokemon {
         String multiplierText = "";
         if(multiplier == 1.2)
         {
-            multiplierText = "It was super effective!";
+            multiplierText = Colors.GREEN_BOLD + "It was super effective!" + Colors.RESET ;
         }
         if(multiplier == 0.8)
         {
-            multiplierText = "It was not effective.";
+            multiplierText = Colors.RED_BOLD + "It was not effective." + Colors.RESET;
         }
         damage = Math.round(damage * multiplier * 10.0) / 10.0;
         otherPokemon.hp -= damage;
@@ -426,14 +426,13 @@ public class Pokemon {
             otherPokemon.hp = 0;
             otherPokemon.alive = false;
         }
-        System.out.println(this.name + " used " + moveSet.moveList[attackNumber].name + " against " + 
-        otherPokemon.name + "\n" + otherPokemon.name + " took " + damage + " damage and has " + 
+        System.out.println(Colors.GREEN_BOLD + this.name + " used " + moveSet.moveList[attackNumber].name + " against " + 
+        otherPokemon.name + Colors.RESET + "\n" + otherPokemon.name + " took " + damage + " damage and has " + 
         otherPokemon.hp + " hp left. " + multiplierText);
     }
     //Player attacks the computer
     public void pokemonFight(Pokemon otherPokemon) {
         java.util.Scanner scan = new Scanner(System.in);
-        System.out.println();
         System.out.println("What move do you want to use?");
         System.out.println("Your moves are " + this.moveSet.moveList[0] + ", " 
         + this.moveSet.moveList[1] + ", " + this.moveSet.moveList[2] + ", " 
@@ -442,7 +441,7 @@ public class Pokemon {
         System.out.println();
         while (checkMoveValid(playerMove) == false) 
         {
-            System.out.println("Invalid move, try again. Enter valid move");
+            System.out.println(Colors.RED_BOLD + "Invalid move, try again. Enter valid move" + Colors.RESET);
             playerMove = scan.nextLine();
         }
         System.out.println();

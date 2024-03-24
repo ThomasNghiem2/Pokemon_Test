@@ -129,12 +129,12 @@ public class Player
     public String selectPokemon(Pokemon desiredPokemon) {
         if(!desiredPokemon.alive)
         {
-            return "This Pokemon has fainted";
+            return Colors.RED_BOLD + "This Pokemon has fainted" + Colors.RESET;
         }
         for (Pokemon p: team) {
             if (desiredPokemon.name.equalsIgnoreCase(p.name)) {
                 curr = p;
-                return curr.name + ", I choose you!";
+                return Colors.RED_BOLD + curr.name + ", I choose you!" + Colors.RESET;
             }
         }
         return "Null";
@@ -150,7 +150,7 @@ public class Player
         while(!Pokemon.checkPokeName(switchPoke,list) ||
             switchPoke.equalsIgnoreCase(curr.name)) 
         {
-            System.out.println("Invalid!");
+            System.out.println(Colors.RED_BOLD + "Invalid!" + Colors.RESET);
             switchPoke = scan.nextLine();
         }
         System.out.println();
@@ -159,23 +159,16 @@ public class Player
     //When Cpu switches Pokemon
     public void cpuSwitch (ArrayList<Pokemon> pokemons)
     {
-        if(!(pokemons.size() > 0))
-        {
-            System.out.println("Thomas is unable to switch Pokemons");
-        }
-        else
-        {
-            int randPoke = (int) (Math.random() * pokemons.size());
-            this.selectPokemon(pokemons.get(randPoke));
-            System.out.println("Thomas has switched to " + this.curr.name);
-        }
+        int randPoke = (int) (Math.random() * pokemons.size());
+        this.selectPokemon(pokemons.get(randPoke));
+        System.out.println(Colors.RED_BOLD + "Thomas has switched to " + this.curr.name + Colors.RESET);
     }
     //Heal process
     public void healProcess ()
     {
         if(this.potions == 0)
         {
-            System.out.println(this.name + " ran out of potions");
+            System.out.println(Colors.RED_BOLD + this.name + " ran out of potions" + Colors.RESET);
         }
         else
         {
@@ -186,23 +179,27 @@ public class Player
                 this.curr.hp = this.curr.maxHP;
             }
             potions--;
-            System.out.println(this.name + " used a potion. " + this.curr.name + " gained " + potionHealAmt + " hp! " + 
-                this.curr.name + " has " + this.curr.hp + " hp left. " + this.name + " has " + this.potions + " potions left.");
+            System.out.println(Colors.BLUE_BOLD + this.name + " used a potion. " + this.curr.name + " gained " + potionHealAmt + " hp! " + 
+                this.curr.name + " has " + this.curr.hp + " hp left. " + this.name + " has " + this.potions + " potions left." + Colors.RESET);
         }
     }
     //The Player battle
     public String playerBattle(Player other) throws Exception{
+        int screenReset = 1;
         battleLoop:
         while (true)
         {
             //Beginning of round
             ArrayList<Pokemon> teamArrayList = returnAlive(this.team);
             System.out.println();
-            System.out.println(this.name + " turn:");
+            System.out.println(Colors.CYAN_BOLD + this.name + " turn:" + Colors.RESET);
             System.out.println("Your current Pokemon is " + curr.name + " and it has " + curr.hp + " hp left. Thomas' "  
                 + "current Pokemon is " + other.curr.name + " and it has " + other.curr.hp + " hp left.");
             System.out.println();
-            System.out.println("What do you want to do? (Enter 1 to switch Pokemon, 2 to heal, 3 to battle)");
+            System.out.println("What do you want to do? (Enter " + 
+                Colors.RED_BOLD + "1 to switch Pokemon, " + Colors.RESET +
+                Colors.BLUE_BOLD + "2 to heal, " + Colors.RESET + 
+                Colors.GREEN_BOLD + "3 to battle)" + Colors.RESET);
             Scanner scan = new Scanner(System.in);
             String response = scan.nextLine();
             System.out.println();
@@ -213,17 +210,18 @@ public class Player
             {
                 if(response.equals("2"))
                 {
-                    System.out.println("You have run out of potions! Try something else." + 
-                        "(Enter 1 to switch Pokemon, 2 to heal, 3 to battle)");   
+                    System.out.println(Colors.RED_BOLD + "You have run out of potions! Try something else." + 
+                        "(Enter 1 to switch Pokemon, 2 to heal, 3 to battle)" + Colors.RESET);   
                 }
                 else if (response.equals("1"))
                 {
-                    System.out.println("You have no Pokemon you can switch with! Try something else." + 
-                    "(Enter 1 to switch Pokemon, 2 to heal, 3 to battle)");
+                    System.out.println(Colors.RED_BOLD + "You have no Pokemon you can switch with! Try something else." + 
+                    "(Enter 1 to switch Pokemon, 2 to heal, 3 to battle)" + Colors.RESET);
                 }
                 else
                 {
-                    System.out.println("Invalid input, try again! (Enter 1 to switch Pokemon, 2 to heal, 3 to battle)");
+                    System.out.println(Colors.RED_BOLD + "Invalid input, try again! (Enter 1 to switch Pokemon, 2 to heal, 3 to battle)"
+                        + Colors.RESET);
                 }
                 response = scan.nextLine();
             }
@@ -232,7 +230,7 @@ public class Player
             {
                 if(returnAlive(this.team).size() == 1)
                 {
-                    System.out.println("No Pokemon available to switch to.\n");
+                    System.out.println(Colors.RED_BOLD + "No Pokemon available to switch to.\n" + Colors.RESET);
                 }
                 else
                 {
@@ -256,7 +254,7 @@ public class Player
                 //Checks if computer Pokemon fainted 
                 if(!other.curr.alive)
                 {
-                    System.out.println(other.curr.name + " has fainted.");
+                    System.out.println(Colors.RED_BOLD + other.curr.name + " has fainted." + Colors.RESET);
                     //Checks for battle ending
                     if (!teamAlive(other)) 
                     {
@@ -271,7 +269,7 @@ public class Player
             } 
             //CPU's Turn
             int cpuChoice = other.cpuBehavior();
-            System.out.println("Thomas turn:");
+            System.out.println(Colors.PURPLE_BOLD + "Thomas turn:" + Colors.RESET);
             System.out.println("Thomas's Pokemon is " + other.curr.name + " and it has " + other.curr.hp + " left\n");
             Thread.sleep(1000);
             //CPU switches
@@ -296,7 +294,7 @@ public class Player
                 {
                     //Forces player to switch if their Pokemon faints
                     System.out.println();
-                    System.out.println("Your Pokemon has fainted");
+                    System.out.println(Colors.RED_BOLD + "Your Pokemon has fainted" + Colors.RESET);
                     //Checks for battle ending
                     if (!teamAlive(this)) 
                     {
@@ -307,17 +305,28 @@ public class Player
                     System.out.println();   
                 }
                 Thread.sleep(700);
-            }      
+            }
+            //Resets screen every two iterations
+            if(screenReset == 2)
+            {
+                System.out.print("\033[H\033[2J");  
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+                screenReset = 0;
+            }
+            screenReset = screenReset + 1;  
         }
         //End of game check 
         if (!teamAlive(this) && !teamAlive(other)) {
             return "You Tied! Do you want to try again? (type q if you are done, anything else to play again)";
         }
         else if (!teamAlive(other)) {
-            return "Congratulations! You won! Do you want to play again? (type q if you are done, anything else to play again)";
+            return Colors.GREEN_BOLD + "Congratulations! You won! Do you want to play again? " 
+                + "(type q if you are done, anything else to play again)" + Colors.RESET;
         }
         else {
-            return "Oh No! You Lost! Do you want to try again? (type q if you are done, anything else to play again)";
+            return Colors.RED_BOLD + "Oh No! You Lost! Do you want to try again? " 
+                + "(type q if you are done, anything else to play again)" + Colors.RESET;
         }
     }
 }
