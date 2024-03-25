@@ -309,6 +309,7 @@ public class Player
             //Resets screen every two iterations
             if(screenReset == 2)
             {
+                Thread.sleep(700);
                 System.out.print("\033[H\033[2J");  
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
