@@ -15,14 +15,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static java.lang.ProcessBuilder.*;
 
-public class Mov {
+public class Map {
 
 	private final MoveModel moveModel;
 	private final Showvisible showvisible;
 	boolean xCheck;
 	boolean yCheck;
 
-	public Mov() {
+	public Map() {
 		moveModel = new MoveModel();
 		showvisible = new Showvisible(moveModel);
 		//showvisible.getRndMoverButton().addActionListener(e-> movePlayer());
@@ -119,7 +119,7 @@ public class Mov {
 	}
 
 	public static void main(final String[] args) {
-		new Mov();
+		new Map();
 	}
 }
 
